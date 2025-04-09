@@ -4,20 +4,22 @@ from collections import defaultdict
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+
 def parse_cobol_functions_and_calls(cobol_code):
     # Get the PROCEDURE DIVISION
     procedure_div = re.split(r'^\s*PROCEDURE DIVISION.*$', cobol_code, flags=re.IGNORECASE | re.MULTILINE)
     if len(procedure_div) < 2:
-        return {}, {}
+        return [], {}
 
     code = procedure_div[1]
 
-    # Identify paragraphs and sections
+    # Match paragraph/section headers
     function_pattern = re.compile(r'^\s*([\w-]+)\s+(SECTION\.)?', re.MULTILINE)
     perform_pattern = re.compile(r'PERFORM\s+([\w-]+)', re.IGNORECASE)
 
-    functions = []
+    all_functions = []
     calls = defaultdict(list)
+    called_functions_set = set()
 
     matches = list(function_pattern.finditer(code))
 
@@ -27,14 +29,18 @@ def parse_cobol_functions_and_calls(cobol_code):
         end = matches[i+1].start() if i+1 < len(matches) else len(code)
         body = code[start:end]
 
-        functions.append(name)
+        all_functions.append(name)
         for call in perform_pattern.findall(body):
             calls[name].append(call)
+            called_functions_set.add(call)
 
-    return functions, dict(calls)
+    # Only return functions that are actually called — considered as user-defined
+    user_defined_functions = [fn for fn in all_functions if fn in called_functions_set]
+
+    return user_defined_functions, dict(calls)
 
 
-def extract_functions(code):
+def extract_functions_body(code, only_functions=None):
     # Extract PROCEDURE DIVISION
     procedure_div = re.split(r'^\s*PROCEDURE DIVISION.*$', code, flags=re.IGNORECASE | re.MULTILINE)
     if len(procedure_div) < 2:
@@ -50,6 +56,10 @@ def extract_functions(code):
 
     for i, match in enumerate(matches):
         name = match.group(1)
+
+        if only_functions and name not in only_functions:
+            continue
+
         start = match.end()
         end = matches[i+1].start() if i+1 < len(matches) else len(code)
         body = code[start:end].strip()
@@ -59,7 +69,6 @@ def extract_functions(code):
 
 
 def get_cosine_similarity_of_functions(issue, functions):
-    # Combine issue with function bodies for vectorization
     documents = [issue] + list(functions.values())
     names = list(functions.keys())
 

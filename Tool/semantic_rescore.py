@@ -1,9 +1,9 @@
 import networkx as nx
 
-#temporary graph, this graph will be input
-G = nx.DiGraph()
-G.add_edges_from([("CALCULATE_TAX", "GET_SALARY_DETAILS"), 
-                  ("CALCULATE_TAX", "GET_TAX_RATE")])
+# #temporary graph, this graph will be input
+# G = nx.DiGraph()
+# G.add_edges_from([("CALCULATE_TAX", "GET_SALARY_DETAILS"), 
+#                   ("CALCULATE_TAX", "GET_TAX_RATE")])
 
 #let scores be the semantic scores of the functions
 scores = None
@@ -29,10 +29,5 @@ def recalculate_semantic_scores(graph, scores, alpha=0.2, beta=0.2):
     new_scores = alpha_dependency_score(graph, scores, alpha)
     new_scores = beta_centrality_score(graph, new_scores, beta)
     return new_scores
-
-
-#get the functions with highest similarity scores
-top_functions = sorted(recalculate_semantic_scores(graph=G, scores=scores), key=lambda x: x[1], reverse=True)
-print("highly relevant functions", [f[0] for f in top_functions])
 
 

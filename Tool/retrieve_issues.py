@@ -10,12 +10,11 @@ def extract_file_paths(issue_text):
             file_paths.append(line.strip())
     return file_paths
 
-if __name__ == "__main__":
+def retrieve_file_paths():
     issues = get_github_issues()
 
     for issue in issues:
         issue_text = issue.get("body", "")  
         file_paths = extract_file_paths(issue_text)
 
-        for path in file_paths:
-            print(f"Extracted File Path: {path}")  
+    return file_paths[0]
