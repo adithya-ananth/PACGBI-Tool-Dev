@@ -66,9 +66,9 @@ def call_mistral_fix(api_key: str, model: str, messages: list) -> str:
     response = client.chat.complete(model=model, messages=messages)
     return response.choices[0].message.content
 
-def model_pipeline():
-    file_path = "/content/Resources.Designer.cbl"
-    function_name = "method-id get property"
+def model_pipeline(file_path, function_name):
+    # file_path = "/content/Resources.Designer.cbl"
+    # function_name = "method-id get property"
 
     # first, cobol code related to the function name is extracted.
     # the extracted paragraph_code is added to the prompt and messages curated
