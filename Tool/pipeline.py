@@ -14,6 +14,9 @@ from semantic_rescore import recalculate_semantic_scores
 from model_automation import model_pipeline
 
 import networkx as nx
+import json
+import os
+
 def build_call_graph(calls_dict):
     G = nx.DiGraph()
     for caller, callees in calls_dict.items():
@@ -42,4 +45,13 @@ print("highly relevant function: ", [f[0] for f in top_functions])
 
 modified_code = model_pipeline(file_path_issue, top_functions[0][0])
 
-return modified_code
+data = {
+    "file_path": file_path_issue,
+    "function_start": top_functions[0][0],
+    "function_end": "END-PROCEDURE",
+    "new_body": modified_code,
+}
+with open("input.json", "w") as f:
+    f.write(json.dumps(data))
+
+os.execute("python3 fixer.py")

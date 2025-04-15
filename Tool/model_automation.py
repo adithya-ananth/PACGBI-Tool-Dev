@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1bV6Lhu8XSBqDZ0Tr0Y57ZpQwjy7KOzYk
 """
 
-!pip install mistralai
+# !pip install mistralai
 
 import os
 import re

@@ -1,0 +1,10 @@
+{
+    "github_token": "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",
+    "repo_owner": "SrikarDonur",
+    "repo_name": "cobol-error-fixer",
+    "base_branch": "main",
+    "branch_name": "auto-fix-branch",
+    "commit_message": "Fix: Updated COBOL function",
+    "pr_title": "Fix: Replace old COBOL function",
+    "pr_body": "This PR auto-replaces a COBOL function block."
+}
