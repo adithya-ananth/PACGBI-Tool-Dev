@@ -1,15 +1,7 @@
 import networkx as nx
 
-# #temporary graph, this graph will be input
-# G = nx.DiGraph()
-# G.add_edges_from([("CALCULATE_TAX", "GET_SALARY_DETAILS"), 
-#                   ("CALCULATE_TAX", "GET_TAX_RATE")])
-
-#let scores be the semantic scores of the functions
-scores = None
-
 #if function a is related to function b, then function b's semantic score is added with a factor of 0.2 to the semantic score of function a
-def alpha_dependency_score(graph, function_scores, alpha=0.2):
+def alpha_dependency_score(graph, function_scores, alpha=0.02):
     new_scores = function_scores.copy()
     for node in function_scores:
         for neighbor in graph.successors(node):
@@ -17,7 +9,7 @@ def alpha_dependency_score(graph, function_scores, alpha=0.2):
     return new_scores
 
 #a functions centrality should highly influence an issue, hence the centrality score is added with a factor of 0.2 to teh re-calculated semantic scores
-def beta_centrality_score(graph, function_scores, beta=0.2):
+def beta_centrality_score(graph, function_scores, beta=0.02):
     new_scores = function_scores.copy()
     centrality = nx.betweenness_centrality(graph)
     for node in function_scores:

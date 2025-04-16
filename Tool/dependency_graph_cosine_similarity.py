@@ -15,29 +15,30 @@ def parse_cobol_functions_and_calls(cobol_code):
 
     # Match paragraph/section headers
     function_pattern = re.compile(r'^\s*([\w-]+)\s+(SECTION\.)?', re.MULTILINE)
-    perform_pattern = re.compile(r'PERFORM\s+([\w-]+)', re.IGNORECASE)
+    perform_pattern = re.compile(r'\bPERFORM\s+([\w-]+)', re.IGNORECASE)
 
     all_functions = []
     calls = defaultdict(list)
-    called_functions_set = set()
 
     matches = list(function_pattern.finditer(code))
+    function_bodies = {}
 
     for i, match in enumerate(matches):
         name = match.group(1)
         start = match.end()
-        end = matches[i+1].start() if i+1 < len(matches) else len(code)
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(code)
         body = code[start:end]
-
+        function_bodies[name] = body
         all_functions.append(name)
+
+    defined_function_set = set(all_functions)
+
+    for name, body in function_bodies.items():
         for call in perform_pattern.findall(body):
-            calls[name].append(call)
-            called_functions_set.add(call)
+            if call in defined_function_set:
+                calls[name].append(call)
 
-    # Only return functions that are actually called — considered as user-defined
-    user_defined_functions = [fn for fn in all_functions if fn in called_functions_set]
-
-    return user_defined_functions, dict(calls)
+    return all_functions, dict(calls)
 
 
 def extract_functions_body(code, only_functions=None):
