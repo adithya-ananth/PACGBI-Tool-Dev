@@ -2,6 +2,9 @@ import json
 import os
 import subprocess
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Load config and input
 with open("config.json", "r") as f:
@@ -17,7 +20,7 @@ function_end = data["function_end"]
 new_body = data["new_body"].strip()
 
 # Config info
-GITHUB_TOKEN = config["github_token"]
+GITHUB_TOKEN = os.environ("GITHUB_TOKEN")
 REPO_OWNER = config["repo_owner"]
 REPO_NAME = config["repo_name"]
 base_branch = config["base_branch"]
