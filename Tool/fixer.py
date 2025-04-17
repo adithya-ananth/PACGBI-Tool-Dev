@@ -20,7 +20,7 @@ function_end = data["function_end"]
 new_body = data["new_body"].strip()
 
 # Config info
-GITHUB_TOKEN = os.environ("GITHUB_TOKEN")
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 REPO_OWNER = config["repo_owner"]
 REPO_NAME = config["repo_name"]
 base_branch = config["base_branch"]
