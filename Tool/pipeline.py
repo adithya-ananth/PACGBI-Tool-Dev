@@ -21,6 +21,17 @@ def build_call_graph(all_functions, calls_dict):
 
     return G
 
+def draw_graph_non_blocking(G):
+    plt.ion()  # Turn on interactive mode
+    pos = nx.spring_layout(G, seed=42)
+    plt.figure(figsize=(10, 6))
+    nx.draw(G, pos, with_labels=True, node_size=2000, node_color="lightblue",
+            font_size=10, font_weight="bold", edge_color="gray", arrows=True, arrowstyle='->', arrowsize=15)
+    plt.title("COBOL Function Call Graph (UML Style)", fontsize=14)
+    plt.margins(0.2)
+    plt.draw()  # Draw the plot but don't block the execution
+    plt.pause(1)  # Pause for a short time to allow the plot to render
+
 def main():
     print("PACGBI-TOOL is running!")
 
@@ -42,6 +53,8 @@ def main():
 
     G = build_call_graph(user_defined_functions, calls)
     print("graph: ", G)
+    draw_graph_non_blocking(G)
+
 
     function_names = list(functions_body.keys())
     similarities = {name: score for name, score in zip(function_names, similarities)}
