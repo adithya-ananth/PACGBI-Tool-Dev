@@ -6,7 +6,7 @@ Follow these steps to set up the project locally:
 1. Clone the Repository:
     ```
     git clone <repo name>
-    cd <repo name>
+    cd PACGBI-Tool-Dev
     ```
 
 2. Install required dependencies:
