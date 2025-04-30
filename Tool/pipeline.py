@@ -55,7 +55,7 @@ def main():
 
     G = build_call_graph(user_defined_functions, calls)
     print("graph: ", G)
-    draw_graph_non_blocking(G)
+    # draw_graph_non_blocking(G)
 
 
     function_names = list(functions_body.keys())
