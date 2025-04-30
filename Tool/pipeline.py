@@ -7,6 +7,10 @@ import networkx as nx
 import json
 import os
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 def build_call_graph(all_functions, calls_dict):
     G = nx.DiGraph()
 
