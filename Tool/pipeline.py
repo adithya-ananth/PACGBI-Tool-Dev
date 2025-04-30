@@ -1,7 +1,7 @@
-from .retrieve_issues import retrieve_file_paths
-from .dependency_graph_cosine_similarity import extract_functions_body, parse_cobol_functions_and_calls, get_cosine_similarity_of_functions
-from .semantic_rescore import recalculate_semantic_scores
-from .model_automation import model_pipeline
+from retrieve_issues import retrieve_file_paths
+from dependency_graph_cosine_similarity import extract_functions_body, parse_cobol_functions_and_calls, get_cosine_similarity_of_functions
+from semantic_rescore import recalculate_semantic_scores
+from model_automation import model_pipeline
 
 import networkx as nx
 import json

@@ -1,4 +1,4 @@
-from .issues import get_github_issues
+from issues import get_github_issues
 import re
 
 def extract_file_paths(issue_text):
