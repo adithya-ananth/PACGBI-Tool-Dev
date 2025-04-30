@@ -54,5 +54,5 @@ _PACGBI: A Pipeline for Automated COBOL Generation from Backlog Items_.<br>
 **Adithya Ananth, Anirudh Arrepu, Dhyanam Janardhana, Gadepalli Srirama Surya Ashish, Srikar Vilas Donur,** and **Sudhanva Bharadwaj BM**.
 
 Mentored by:
-_Dr. Sridhar Chimalakonda
+_Dr. Sridhar Chimalakonda,
 IIT Tirupati_
