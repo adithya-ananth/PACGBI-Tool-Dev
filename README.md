@@ -15,6 +15,10 @@ By integrating graph theory, and large language models (LLMs), PACGBI locates af
 - **GitHub CLI Extension** -  to easily run the tool from your terminal
 
 ---
+## Repo Structure
+Papers - Refernce Paper
+Tool - The files containing the helper classes used in the pipeline.
+cobal-test - Contains the test files on which the model was evaluated
 
 ## Getting Started
 
@@ -26,20 +30,17 @@ Follow these steps to set up and run the project locally:
     cd PACGBI-Tool-Dev
     ```
 
-2. **Install Required Dependencies**:
-    ```bash
+2. Install required dependencies in a new virtual environmnet:
+    ```
+    python -m venv env
+    ./env/Scripts/activate
     pip install -r requirements.txt
     ```
-
-3. **Set Environment Variables**:
-    ```bash
-    export MISTRAL_API_KEY=<your_mistral_api_key>
-    export GITHUB_TOKEN=<your_github_token>
+    
+3. Run the pipeline.py file in the Tool Directory to execute the code via the terminal:
     ```
-
-4. **Run the Pipeline**:
-    ```bash
-    python3 pipeline.py
+    cd Tool
+    python pipeline.py
     ```
 
 Alternatively, install and run as a GitHub extension:
