@@ -45,7 +45,7 @@ Follow these steps to set up and run the project locally:
 
 Alternatively, install and run as a GitHub extension:
 ```bash
-pip install git+https://github.com/AnirudhArrepu/PACGBI-Tool-Dev.git
+pip install git+https://github.com/adithya-ananth/PACGBI-Tool-Dev.git
 pacgbi
 ```
 
